@@ -152,5 +152,5 @@ ansible all -b -m service -a "name=nginx state=started"
 
 ## Author
 
-**Sreehaas** — SRMIST, Department of Computing  
-Project built as part of cloud automation and DevOps learning.
+**Sreehaas** — SRMIST, Department of Networking and Communications
+Project built as part of Open Source Automation Using Ansible.
