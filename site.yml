@@ -1,0 +1,42 @@
+---
+- name: Deploy LEMP Stack with WordPress
+  hosts: webservers
+  become: yes
+
+  roles:
+    - nginx
+    - mysql
+    - php
+    - wordpress
+
+  post_tasks:
+    - name: Verify services are running
+      shell: "systemctl is-active {{ item }}"
+      loop:
+        - nginx
+        - mysql
+        - php8.1-fpm
+      register: service_status
+
+    - name: Show service status
+      debug:
+        msg: "{{ item.item }} is {{ item.stdout }}"
+      loop: "{{ service_status.results }}"
+
+    - name: Show PHP version
+      shell: php -v | head -1
+      register: php_version
+
+    - name: Show stack summary
+      debug:
+        msg:
+          - "=============================="
+          - " LEMP + WordPress Deployment"
+          - "=============================="
+          - "Nginx  : active and running"
+          - "MySQL  : active and running"
+          - "PHP    : {{ php_version.stdout }}"
+          - "WordPress DB : wordpress"
+          - "WordPress URL: http://localhost"
+          - "WP Admin     : http://localhost/wp-admin"
+          - "=============================="

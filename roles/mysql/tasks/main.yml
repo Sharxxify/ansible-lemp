@@ -1,0 +1,26 @@
+---
+- name: Install MySQL
+  apt:
+    name:
+      - mysql-server
+      - python3-pymysql
+    state: present
+    update_cache: yes
+  become: yes
+
+- name: Ensure MySQL is started
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+  become: yes
+
+- name: Set MySQL root password
+  mysql_user:
+    name: root
+    password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    host_all: yes
+    state: present
+  become: yes
+  ignore_errors: yes

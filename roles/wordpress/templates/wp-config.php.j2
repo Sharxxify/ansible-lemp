@@ -1,0 +1,26 @@
+<?php
+define( 'DB_NAME', '{{ wp_db_name }}' );
+define( 'DB_USER', '{{ wp_db_user }}' );
+define( 'DB_PASSWORD', '{{ wp_db_password }}' );
+define( 'DB_HOST', '{{ wp_db_host }}' );
+define( 'DB_CHARSET', 'utf8' );
+define( 'DB_COLLATE', '' );
+
+define( 'AUTH_KEY',         'ansible-unique-key-1' );
+define( 'SECURE_AUTH_KEY',  'ansible-unique-key-2' );
+define( 'LOGGED_IN_KEY',    'ansible-unique-key-3' );
+define( 'NONCE_KEY',        'ansible-unique-key-4' );
+define( 'AUTH_SALT',        'ansible-unique-salt-1' );
+define( 'SECURE_AUTH_SALT', 'ansible-unique-salt-2' );
+define( 'LOGGED_IN_SALT',   'ansible-unique-salt-3' );
+define( 'NONCE_SALT',       'ansible-unique-salt-4' );
+
+$table_prefix = 'wp_';
+define( 'WP_DEBUG', false );
+define( 'WP_SITEURL', '{{ wp_site_url }}' );
+define( 'WP_HOME', '{{ wp_site_url }}' );
+
+if ( ! defined( 'ABSPATH' ) ) {
+    define( 'ABSPATH', __DIR__ . '/' );
+}
+require_once ABSPATH . 'wp-settings.php';

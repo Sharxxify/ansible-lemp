@@ -1,0 +1,19 @@
+---
+- name: Install PHP and modules
+  apt:
+    name:
+      - php8.1-fpm
+      - php8.1-mysql
+      - php8.1-cli
+      - php8.1-curl
+      - php8.1-mbstring
+    state: present
+    update_cache: yes
+  become: yes
+
+- name: Ensure PHP-FPM is started
+  service:
+    name: php8.1-fpm
+    state: started
+    enabled: yes
+  become: yes
